@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TO DO APP</title>
+</head>
+
+<body>
+    <div>
+        <h2>todos</h2>
+        <input type="text" id="inputField" placeholder="What needs to be done?" />
+        <button onclick="addTodo()">Add</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    <script>
+        let todos = [];
+
+        function handleInputChange() {
+            const handleInputChange = (e) => {
+                setInputValue(e.target.value);
+            };
+        }
+
+        function addTodo() {
+            const addTodo = () => {
+                if (inputValue.trim() !== '') {
+                    setTodos([...todos, inputValue]);
+                    setInputValue('');
+                }
+            };
+        }
+
+        function deleteTodo() {
+            const deleteTodo = (index) => {
+                const updatedTodos = [...todos];
+                updatedTodos.splice(index, 1);
+                setTodos(updatedTodos);
+            };
+        }
+
+        function renderTodos() {
+            const todoList = document.getElementById("todoList");
+            todoList.innerHTML = "";
+
+            todos.forEach((todo, index) => {
+                const li = document.createElement("li");
+                li.textContent = todo;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = () => deleteTodo(index);
+
+                li.appendChild(deleteButton);
+                todoList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+
+</html>
